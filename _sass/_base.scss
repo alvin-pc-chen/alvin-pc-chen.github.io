@@ -4,19 +4,26 @@
 
 // Typography
 
-p,
-h1,
+p, 
+h1 {
+  color: var(--global-text-color);
+  font-family: Roboto;
+}
 h2,
 h3,
 h4,
 h5,
-h6,
+h6 {
+  color: var(--global-text-color);
+  font-family: Agbalumo;
+}
 em,
 div,
 li,
 span,
 strong {
   color: var(--global-text-color);
+  font-family: Agbalumo;
 }
 
 hr {
