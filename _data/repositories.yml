@@ -1,12 +1,6 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - alvin-pc-chen
 
 github_repos:
-  - alshedivat/al-folio
-  - twbs/bootstrap
-  - jekyll/jekyll
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - jpswalsh/academicons
-  - mathjax/MathJax
+  - alvin-pc-chen/semeval_irony_detector
+  - alvin-pc-chen/cnn-from-scratch
