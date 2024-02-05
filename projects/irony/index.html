@@ -54,15 +54,7 @@
 53
 54
 55
-56
-57
-58
-59
-</pre></td> <td class="code"><pre> <span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
-<span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
-
-<span class="kn">import</span> <span class="n">torch</span>
-<span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+</pre></td> <td class="code"><pre><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="kn">import</span> <span class="n">spacy</span>
 
 <span class="k">class</span> <span class="nc">Tokenizer</span><span class="p">:</span>
@@ -135,15 +127,17 @@
 15
 16
 17
-</pre></td> <td class="code"><pre> <span class="kn">import</span> <span class="n">util</span>
+18
+</pre></td> <td class="code"><pre><span class="kn">from</span> <span class="n">functions.util</span> <span class="kn">import</span> <span class="n">load_datasets</span><span class="p">,</span> <span class="n">split_data</span>
 
-<span class="n">embeddings_path</span> <span class="o">=</span> <span class="sh">'</span><span class="s">glove.twitter.27B.200d.txt</span><span class="sh">'</span>
+<span class="c1"># Set up paths and constants
+</span><span class="n">embeddings_path</span> <span class="o">=</span> <span class="sh">'</span><span class="s">glove.twitter.27B.200d.txt</span><span class="sh">'</span>
 <span class="n">vocab_path</span> <span class="o">=</span> <span class="sh">"</span><span class="s">./vocab.txt</span><span class="sh">"</span>
 <span class="n">SPECIAL_TOKENS</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">&lt;UNK&gt;</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">&lt;PAD&gt;</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">&lt;SOS&gt;</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">&lt;EOS&gt;</span><span class="sh">'</span><span class="p">]</span>
 
 <span class="c1"># Download and split data
-</span><span class="n">train_sentences</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">test_sentences</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">,</span> <span class="n">label2i</span> <span class="o">=</span> <span class="n">util</span><span class="p">.</span><span class="nf">load_datasets</span><span class="p">()</span>
-<span class="n">training_sentences</span><span class="p">,</span> <span class="n">training_labels</span><span class="p">,</span> <span class="n">dev_sentences</span><span class="p">,</span> <span class="n">dev_labels</span> <span class="o">=</span> <span class="n">util</span><span class="p">.</span><span class="nf">split_data</span><span class="p">(</span><span class="n">train_sentences</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
+</span><span class="n">train_sentences</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">test_sentences</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">,</span> <span class="n">label2i</span> <span class="o">=</span> <span class="nf">load_datasets</span><span class="p">()</span>
+<span class="n">training_sentences</span><span class="p">,</span> <span class="n">training_labels</span><span class="p">,</span> <span class="n">dev_sentences</span><span class="p">,</span> <span class="n">dev_labels</span> <span class="o">=</span> <span class="nf">split_data</span><span class="p">(</span><span class="n">train_sentences</span><span class="p">,</span> <span class="n">train_labels</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
 
 <span class="c1"># Set up tokenizer and make vocab
 </span><span class="n">tokenizer</span> <span class="o">=</span> <span class="nc">Tokenizer</span><span class="p">()</span>
@@ -250,7 +244,15 @@
 95
 96
 97
-</pre></td> <td class="code"><pre>  <span class="k">def</span> <span class="nf">read_pretrained_embeddings</span><span class="p">(</span>
+98
+99
+100
+101
+</pre></td> <td class="code"><pre><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">import</span> <span class="n">torch</span>
+
+
+<span class="k">def</span> <span class="nf">read_pretrained_embeddings</span><span class="p">(</span>
     <span class="n">embeddings_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">vocab_path</span><span class="p">:</span> <span class="nb">str</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="n">torch</span><span class="p">.</span><span class="n">FloatTensor</span><span class="p">]:</span>
@@ -362,7 +364,13 @@
 12
 13
 14
-</pre></td> <td class="code"><pre> <span class="k">def</span> <span class="nf">encode_sentences</span><span class="p">(</span><span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">word2i</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="p">.</span><span class="n">LongTensor</span><span class="p">:</span>
+15
+16
+17
+</pre></td> <td class="code"><pre><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">import</span> <span class="n">torch</span>
+
+<span class="k">def</span> <span class="nf">encode_sentences</span><span class="p">(</span><span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="n">word2i</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="p">.</span><span class="n">LongTensor</span><span class="p">:</span>
     <span class="sh">"""</span><span class="s">Encode the tokens in each sentence in the batch with a dictionary.
     Args:
         batch (List[List[str]]): The padded and tokenized batch of sentences.
@@ -443,7 +451,7 @@
 32
 33
 34
-</pre></td> <td class="code"><pre> <span class="kn">import</span> <span class="n">torch</span>
+</pre></td> <td class="code"><pre><span class="kn">import</span> <span class="n">torch</span>
 
 <span class="k">class</span> <span class="nc">IronyDetector</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
@@ -514,7 +522,15 @@
 34
 35
 36
-</pre></td> <td class="code"><pre> <span class="kn">from</span> <span class="n">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm</span> <span class="k">as</span> <span class="n">tqdm</span>
+37
+38
+39
+40
+</pre></td> <td class="code"><pre><span class="kn">from</span> <span class="n">tqdm.notebook</span> <span class="kn">import</span> <span class="n">tqdm</span> <span class="k">as</span> <span class="n">tqdm</span>
+<span class="kn">from</span> <span class="n">functions.util</span> <span class="kn">import</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">avg_f1_score</span>
+<span class="kn">import</span> <span class="n">random</span>
+<span class="kn">import</span> <span class="n">torch</span>
+
 <span class="k">def</span> <span class="nf">training_loop</span><span class="p">(</span>
     <span class="n">num_epochs</span><span class="p">,</span>
     <span class="n">train_features</span><span class="p">,</span>
@@ -572,9 +588,7 @@
 4
 5
 6
-7
-</pre></td> <td class="code"><pre> 
-<span class="c1"># Hyperparameters
+</pre></td> <td class="code"><pre><span class="c1"># Hyperparameters
 </span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">8</span>
 <span class="n">epochs</span> <span class="o">=</span> <span class="mi">15</span>
 <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.00005</span>
@@ -594,9 +608,7 @@
 11
 12
 13
-14
-</pre></td> <td class="code"><pre> 
-<span class="c1"># Create batches
+</pre></td> <td class="code"><pre><span class="c1"># Create batches
 </span><span class="n">batch_tokenized</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="nf">make_batches</span><span class="p">(</span><span class="n">training_sentences</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
     <span class="n">batch_tokenized</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="nf">tokenizer</span><span class="p">(</span><span class="n">batch</span><span class="p">))</span>
@@ -621,9 +633,7 @@
 9
 10
 11
-12
-</pre></td> <td class="code"><pre> 
-<span class="c1"># Train model
+</pre></td> <td class="code"><pre><span class="c1"># Train model
 </span><span class="n">trained_model</span> <span class="o">=</span> <span class="nf">training_loop</span><span class="p">(</span>
     <span class="n">epochs</span><span class="p">,</span>
     <span class="n">train_features</span><span class="p">,</span>
@@ -634,4 +644,57 @@
     <span class="n">model</span><span class="p">,</span>
     <span class="n">label2i</span><span class="p">,</span>
 <span class="p">)</span>
-</pre></td> </tr></tbody></table></code></pre></figure> <h2 id="results">Results</h2> <p>Here are some of the hyperparameters I experimented with:</p> <table> <thead> <tr> <th><strong>Test Avg F1</strong></th> <th><strong>Epochs</strong></th> <th><strong>Learning Rate</strong></th> <th><strong>Optimizer</strong></th> <th><strong>Hidden Layer Dimension</strong></th> <th><strong>Weight Decay</strong></th> </tr> </thead> <tbody> <tr> <td><strong>0.7000</strong></td> <td>20</td> <td>0.00005</td> <td>AdamW</td> <td>128</td> <td>0</td> </tr> <tr> <td><strong>0.6947</strong></td> <td>20</td> <td>0.00005</td> <td>AdamW</td> <td>256</td> <td>0</td> </tr> <tr> <td><strong>0.6947</strong></td> <td>15</td> <td>0.00005</td> <td>AdamW</td> <td>256</td> <td>0</td> </tr> <tr> <td><strong>0.6798</strong></td> <td>15</td> <td>0.00005</td> <td>AdamW</td> <td>128</td> <td>0.01</td> </tr> <tr> <td><strong>0.6657</strong></td> <td>15</td> <td>0.00005</td> <td>AdamW</td> <td>128</td> <td>0.1</td> </tr> <tr> <td><strong>0.6899</strong></td> <td>15</td> <td>0.0001</td> <td>AdamW</td> <td>64</td> <td>0.1</td> </tr> <tr> <td><strong>0.6525</strong></td> <td>15</td> <td>0.001</td> <td>AdamW</td> <td>64</td> <td>0.1</td> </tr> <tr> <td><strong>0.5535</strong></td> <td>10</td> <td>0.001</td> <td>AdamW</td> <td>64</td> <td>0.1</td> </tr> <tr> <td><strong>0.5556</strong></td> <td>10</td> <td>0.1</td> <td>SGD</td> <td>32</td> <td>0</td> </tr> <tr> <td><strong>0.2840</strong></td> <td>20</td> <td>0.00001</td> <td>RAdam</td> <td>128</td> <td>0.1</td> </tr> <tr> <td><strong>0.6846</strong></td> <td>15</td> <td>0.001</td> <td>RAdam</td> <td>64</td> <td>0.0001</td> </tr> <tr> <td><strong>0.3758</strong></td> <td>12</td> <td>0.01</td> <td>RAdam</td> <td>128</td> <td>0.0001</td> </tr> <tr> <td><strong>0.7129</strong></td> <td>10</td> <td>0.00005</td> <td>AdamW</td> <td>128</td> <td>0</td> </tr> </tbody> </table> <p>As discussed in the introduction, there really isn’t enough training data to train all the paramters for large hidden layer dimensions and peak performance was reached at <code class="language-plaintext highlighter-rouge">hidden_dim=128</code>. Similarly, at small learning rates there wasn’t enough signal to backpropagate through the model, which resulted in failed training loops. Weight decay was also an interesting hyperparameter to toy around with although I ultimately achieved best results by setting it to <code class="language-plaintext highlighter-rouge">0</code>.</p> <h2 id="sources">Sources</h2> <ul> <li> <a href="https://github.com/Cyvhee/SemEval2018-Task3" rel="external nofollow noopener" target="_blank">SemEval Repository</a> (<a href="https://competitions.codalab.org/competitions/17468#results" rel="external nofollow noopener" target="_blank">Codalab Competition</a>)</li> <li><a href="https://nlp.stanford.edu/projects/glove/" rel="external nofollow noopener" target="_blank">GloVe embeddings</a></li> <li><a href="https://pytorch.org/docs/stable/_modules/torch/nn/init.html#xavier_uniform_" rel="external nofollow noopener" target="_blank">Xavier Initialization</a></li> <li><a href="https://paperswithcode.com/method/bilstm" rel="external nofollow noopener" target="_blank">Understanding BiLSTMs</a></li> <li><a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" rel="external nofollow noopener" target="_blank">Understanding LSTMs</a></li> <li><a href="https://www.geeksforgeeks.org/introduction-to-recurrent-neural-network/" rel="external nofollow noopener" target="_blank">Intro to RNNs</a></li> <li><a href="https://www.geeksforgeeks.org/self-supervised-learning-ssl/" rel="external nofollow noopener" target="_blank">Self-Supervised Learning</a></li> <li><a href="https://en.wikipedia.org/wiki/One-hot" rel="external nofollow noopener" target="_blank">One-Hot Vector Encoding</a></li> <li><a href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" rel="external nofollow noopener" target="_blank"><code class="language-plaintext highlighter-rouge">torch.nn.Module</code> Documentation</a></li> <li><a href="https://jmlr.org/papers/v15/srivastava14a.html" rel="external nofollow noopener" target="_blank">Understanding Dropout Values</a></li> <li><a href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html" rel="external nofollow noopener" target="_blank"><code class="language-plaintext highlighter-rouge">torch.nn.Linear</code> Documentation</a></li> <li><a href="https://pytorch.org/docs/stable/optim.html" rel="external nofollow noopener" target="_blank"><code class="language-plaintext highlighter-rouge">torch.optim</code> Documentation</a></li> </ul> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2024 Alvin Chen. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Last updated: February 03, 2024. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script src="/assets/js/no_defer.js?2930004b8d7fcd0a8e00fdcfc8fc9f24"></script> <script defer src="/assets/js/common.js?4a129fbf39254905f505c7246e641eaf"></script> <script defer src="/assets/js/copy_code.js?12775fdf7f95e901d7119054556e495f" type="text/javascript"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script type="text/javascript">window.MathJax={tex:{tags:"ams"}};</script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script> <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <script type="text/javascript">function progressBarSetup(){"max"in document.createElement("progress")?(initializeProgressElement(),$(document).on("scroll",function(){progressBar.attr({value:getCurrentScrollPosition()})}),$(window).on("resize",initializeProgressElement)):(resizeProgressBar(),$(document).on("scroll",resizeProgressBar),$(window).on("resize",resizeProgressBar))}function getCurrentScrollPosition(){return $(window).scrollTop()}function initializeProgressElement(){let e=$("#navbar").outerHeight(!0);$("body").css({"padding-top":e}),$("progress-container").css({"padding-top":e}),progressBar.css({top:e}),progressBar.attr({max:getDistanceToScroll(),value:getCurrentScrollPosition()})}function getDistanceToScroll(){return $(document).height()-$(window).height()}function resizeProgressBar(){progressBar.css({width:getWidthPercentage()+"%"})}function getWidthPercentage(){return getCurrentScrollPosition()/getDistanceToScroll()*100}const progressBar=$("#progress");window.onload=function(){setTimeout(progressBarSetup,50)};</script> </body> </html>
+</pre></td> </tr></tbody></table></code></pre></figure> <h2 id="results">Results</h2> <p>To test our model let’s write a simple predict functions:</p> <figure class="highlight"><pre><code class="language-python" data-lang="python"><table class="rouge-table"><tbody><tr>
+<td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+</pre></td> <td class="code"><pre><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="n">functions.util</span> <span class="kn">import</span> <span class="n">f1_score</span><span class="p">,</span> <span class="n">avg_f1_score</span>
+<span class="kn">import</span> <span class="n">torch</span>
+
+<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">torch</span><span class="p">.</span><span class="n">nn</span><span class="p">.</span><span class="n">Module</span><span class="p">,</span> <span class="n">sequences</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">torch</span><span class="p">.</span><span class="n">Tensor</span><span class="p">]):</span>
+    <span class="sh">"""</span><span class="s">Run prediction with the model
+    Args: model (torch.nn.Module): Model to use.
+        dev_sequences (List[torch.Tensor]): List of encoded sequences to analyze.
+    Returns:
+        List[int]: List of predicted labels.
+    </span><span class="sh">"""</span>
+    <span class="n">preds</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="nf">no_grad</span><span class="p">():</span>
+        <span class="n">model</span><span class="p">.</span><span class="nf">eval</span><span class="p">()</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="nf">model</span><span class="p">(</span><span class="n">sequences</span><span class="p">)</span>
+        <span class="n">preds</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span><span class="n">torch</span><span class="p">.</span><span class="nf">argmax</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">).</span><span class="nf">squeeze</span><span class="p">().</span><span class="nf">numpy</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">preds</span>
+
+<span class="c1"># Test model
+</span><span class="n">test_features</span> <span class="o">=</span> <span class="nf">encode_sentences</span><span class="p">(</span><span class="n">test_sentences</span><span class="p">,</span> <span class="n">word2i</span><span class="p">)</span>
+<span class="n">test_labels</span> <span class="o">=</span> <span class="p">[</span><span class="nf">int</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">test_labels</span><span class="p">]</span>
+<span class="n">preds</span> <span class="o">=</span> <span class="nf">predict</span><span class="p">(</span><span class="n">trained_model</span><span class="p">,</span> <span class="n">test_features</span><span class="p">)</span>
+<span class="n">dev_f1</span> <span class="o">=</span> <span class="nf">f1_score</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">,</span> <span class="n">label2i</span><span class="p">[</span><span class="sh">'</span><span class="s">1</span><span class="sh">'</span><span class="p">])</span>
+<span class="n">dev_avg_f1</span> <span class="o">=</span> <span class="nf">avg_f1_score</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">test_labels</span><span class="p">,</span> <span class="nf">set</span><span class="p">(</span><span class="n">label2i</span><span class="p">.</span><span class="nf">values</span><span class="p">()))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Test F1 </span><span class="si">{</span><span class="n">dev_f1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Avg Test F1 </span><span class="si">{</span><span class="n">dev_avg_f1</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
+</pre></td> </tr></tbody></table></code></pre></figure> <p>In this function, we use <code class="language-plaintext highlighter-rouge">with torch.no_grad()</code> so that no gradients are generated since we are not backpropagating anything here. We then set the model to evaluation mode with <code class="language-plaintext highlighter-rouge">model.eval()</code>, which freezes the weights and further prevents any sort of changes to the model during prediction. Since our outputs represent binary probabilities, we’ll need to <code class="language-plaintext highlighter-rouge">squeeze()</code> the tensor to get the correct shape.</p> <p>Here are some of the hyperparameters I experimented with:</p> <table> <thead> <tr> <th><strong>Test Avg F1</strong></th> <th><strong>Epochs</strong></th> <th><strong>Learning Rate</strong></th> <th><strong>Optimizer</strong></th> <th><strong>Hidden Layer Dimension</strong></th> <th><strong>Weight Decay</strong></th> </tr> </thead> <tbody> <tr> <td><strong>0.7000</strong></td> <td>20</td> <td>0.00005</td> <td>AdamW</td> <td>128</td> <td>0</td> </tr> <tr> <td><strong>0.6947</strong></td> <td>20</td> <td>0.00005</td> <td>AdamW</td> <td>256</td> <td>0</td> </tr> <tr> <td><strong>0.6947</strong></td> <td>15</td> <td>0.00005</td> <td>AdamW</td> <td>256</td> <td>0</td> </tr> <tr> <td><strong>0.6798</strong></td> <td>15</td> <td>0.00005</td> <td>AdamW</td> <td>128</td> <td>0.01</td> </tr> <tr> <td><strong>0.6657</strong></td> <td>15</td> <td>0.00005</td> <td>AdamW</td> <td>128</td> <td>0.1</td> </tr> <tr> <td><strong>0.6899</strong></td> <td>15</td> <td>0.0001</td> <td>AdamW</td> <td>64</td> <td>0.1</td> </tr> <tr> <td><strong>0.6525</strong></td> <td>15</td> <td>0.001</td> <td>AdamW</td> <td>64</td> <td>0.1</td> </tr> <tr> <td><strong>0.5535</strong></td> <td>10</td> <td>0.001</td> <td>AdamW</td> <td>64</td> <td>0.1</td> </tr> <tr> <td><strong>0.5556</strong></td> <td>10</td> <td>0.1</td> <td>SGD</td> <td>32</td> <td>0</td> </tr> <tr> <td><strong>0.2840</strong></td> <td>20</td> <td>0.00001</td> <td>RAdam</td> <td>128</td> <td>0.1</td> </tr> <tr> <td><strong>0.6846</strong></td> <td>15</td> <td>0.001</td> <td>RAdam</td> <td>64</td> <td>0.0001</td> </tr> <tr> <td><strong>0.3758</strong></td> <td>12</td> <td>0.01</td> <td>RAdam</td> <td>128</td> <td>0.0001</td> </tr> <tr> <td><strong>0.7129</strong></td> <td>10</td> <td>0.00005</td> <td>AdamW</td> <td>128</td> <td>0</td> </tr> </tbody> </table> <p>As discussed in the introduction, there really isn’t enough training data to train all the paramters for large hidden layer dimensions and peak performance was reached at <code class="language-plaintext highlighter-rouge">hidden_dim=128</code>. Similarly, at small learning rates there wasn’t enough signal to backpropagate through the model, which resulted in failed training loops. Weight decay was also an interesting hyperparameter to toy around with although I ultimately achieved best results by setting it to <code class="language-plaintext highlighter-rouge">0</code>.</p> <h2 id="sources">Sources</h2> <ul> <li> <a href="https://github.com/Cyvhee/SemEval2018-Task3" rel="external nofollow noopener" target="_blank">SemEval Repository</a> (<a href="https://competitions.codalab.org/competitions/17468#results" rel="external nofollow noopener" target="_blank">Codalab Competition</a>)</li> <li><a href="https://nlp.stanford.edu/projects/glove/" rel="external nofollow noopener" target="_blank">GloVe embeddings</a></li> <li><a href="https://pytorch.org/docs/stable/_modules/torch/nn/init.html#xavier_uniform_" rel="external nofollow noopener" target="_blank">Xavier Initialization</a></li> <li><a href="https://paperswithcode.com/method/bilstm" rel="external nofollow noopener" target="_blank">Understanding BiLSTMs</a></li> <li><a href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/" rel="external nofollow noopener" target="_blank">Understanding LSTMs</a></li> <li><a href="https://www.geeksforgeeks.org/introduction-to-recurrent-neural-network/" rel="external nofollow noopener" target="_blank">Intro to RNNs</a></li> <li><a href="https://www.geeksforgeeks.org/self-supervised-learning-ssl/" rel="external nofollow noopener" target="_blank">Self-Supervised Learning</a></li> <li><a href="https://en.wikipedia.org/wiki/One-hot" rel="external nofollow noopener" target="_blank">One-Hot Vector Encoding</a></li> <li><a href="https://pytorch.org/docs/stable/generated/torch.nn.Module.html#torch.nn.Module" rel="external nofollow noopener" target="_blank"><code class="language-plaintext highlighter-rouge">torch.nn.Module</code> Documentation</a></li> <li><a href="https://jmlr.org/papers/v15/srivastava14a.html" rel="external nofollow noopener" target="_blank">Understanding Dropout Values</a></li> <li><a href="https://pytorch.org/docs/stable/generated/torch.nn.Linear.html" rel="external nofollow noopener" target="_blank"><code class="language-plaintext highlighter-rouge">torch.nn.Linear</code> Documentation</a></li> <li><a href="https://pytorch.org/docs/stable/optim.html" rel="external nofollow noopener" target="_blank"><code class="language-plaintext highlighter-rouge">torch.optim</code> Documentation</a></li> </ul> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2024 Alvin Chen. Powered by <a href="https://jekyllrb.com/" target="_blank" rel="external nofollow noopener">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio" rel="external nofollow noopener" target="_blank">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. Last updated: February 05, 2024. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script src="/assets/js/no_defer.js?2930004b8d7fcd0a8e00fdcfc8fc9f24"></script> <script defer src="/assets/js/common.js?4a129fbf39254905f505c7246e641eaf"></script> <script defer src="/assets/js/copy_code.js?12775fdf7f95e901d7119054556e495f" type="text/javascript"></script> <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script> <script async src="https://badge.dimensions.ai/badge.js"></script> <script type="text/javascript">window.MathJax={tex:{tags:"ams"}};</script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script> <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script> <script type="text/javascript">function progressBarSetup(){"max"in document.createElement("progress")?(initializeProgressElement(),$(document).on("scroll",function(){progressBar.attr({value:getCurrentScrollPosition()})}),$(window).on("resize",initializeProgressElement)):(resizeProgressBar(),$(document).on("scroll",resizeProgressBar),$(window).on("resize",resizeProgressBar))}function getCurrentScrollPosition(){return $(window).scrollTop()}function initializeProgressElement(){let e=$("#navbar").outerHeight(!0);$("body").css({"padding-top":e}),$("progress-container").css({"padding-top":e}),progressBar.css({top:e}),progressBar.attr({max:getDistanceToScroll(),value:getCurrentScrollPosition()})}function getDistanceToScroll(){return $(document).height()-$(window).height()}function resizeProgressBar(){progressBar.css({width:getWidthPercentage()+"%"})}function getWidthPercentage(){return getCurrentScrollPosition()/getDistanceToScroll()*100}const progressBar=$("#progress");window.onload=function(){setTimeout(progressBarSetup,50)};</script> </body> </html>
