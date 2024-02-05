@@ -78,7 +78,7 @@ The <strong>[Fashion MNIST](https://github.com/zalandoresearch/fashion-mnist)</s
 
 The core of the CNN is `convlution`: square kernels with odd-numbered length are multiplied elementwise on each region in the image and summed up. Strictly speaking this is <strong>[cross-correlation](https://towardsdatascience.com/convolution-vs-cross-correlation-81ec4a0ec253)</strong>; in convlution the kernel has to be rotated by `180°`, as seen below. The kernel is iterated across the image in `strides` and outputs are positionally combined to form a 2D matrix. 
 
-{% highlight python linenos %} class ConvLayer:
+{% highlight python linenos %}class ConvLayer:
     def __init__(self, input_shape, kernel_size=5, num_kernels=6, padding=0):
         # Get input dimensions
         input_depth, input_height, input_width = input_shape
@@ -102,7 +102,7 @@ Notice that the resulting array will be smaller than the original image. In orde
 
 ### Forward
 
-{% highlight python linenos %} class ConvLayer:
+{% highlight python linenos %}class ConvLayer:
     #...
     def iter_regions(self, image):
         """
@@ -133,7 +133,7 @@ The `forward()` function is straightforward:
 Since we generally work with more than one kernel and input matrices are often 3D, we can stack kernels into a 4D matrix that can be easily multiplied with the 3D input array. The regions will be multiplied along the first dimension of the kernel array and summed up along the other three dimensions which will generate a 1D vector representing the output of each kernel on the region.
 
 ### Backpropagation
-{% highlight python linenos %} class ConvLayer:
+{% highlight python linenos %}class ConvLayer:
     #...
     def backprop(self, d_L_d_out, learn_rate):
         """
@@ -182,7 +182,7 @@ The `input gradient` is where we encounter `convolution`. Without going into too
 
 At the core of the neural network is the `activation function`, which is applied to the outputs of the previous layer to introduce nonlinearity. Without activation, stacked layers remain linear and have the same predictive power as a single layer. The downside to the nonlinear function occurs in backpropagation, where certain outputs can result in disappearing gradients breaking the training loop. For this reason, many models prefer using [`ReLU`](https://machinelearningmastery.com/rectified-linear-activation-function-for-deep-learning-neural-networks/) as the activation function for non-terminal layers. `ReLU` behaves linearly for inputs greater than `0` which means its derivative is `1`, preventing disappearing gradients while maintaining nonlinearity. The derivative of `ReLU` is undefined at `0` conventionally we set it to `0`.
 
-{% highlight python linenos %} class ReLU:
+{% highlight python linenos %}class ReLU:
     """
     Simple ReLU activation function
     """
@@ -499,8 +499,7 @@ The model class and training loop are to implement since the `forward()` and `ba
 
 ## Benchmarking with Keras 
 
-{% highlight python linenos %}
-from keras.models import Sequential
+{% highlight python linenos %}from keras.models import Sequential
 from keras.layers import Conv2D, MaxPooling2D, Dense, Flatten
 from keras.utils import to_categorical
 from keras.optimizers.legacy import SGD

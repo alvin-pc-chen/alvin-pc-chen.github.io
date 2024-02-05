@@ -61,11 +61,7 @@ The weakness of using a bidirectional network for language modeling is in traini
 
 Before using `GloVe` embeddings we first need to process them into uniform atoms that can be encoded as embeddings. As you can imagine, there's a great diversity in the way tweets are written: typos, emojis, or different spellings for exaggeration are all common. We create uniformity by breaking tweets down into `tokens`: most commonly occurring word, subword, emoji, or other part of text. How this is done depends on the `tokenizer`, a basic building block of language models. For this project, we use a `tokenizer` built in `spaCy` which has a high overlap with the tokens in `GloVe`:
 
-{% highlight python linenos %} from typing import Dict, List, Optional, Tuple
-from collections import Counter
-
-import torch
-import numpy as np
+{% highlight python linenos %}from typing import List, Optional
 import spacy
 
 class Tokenizer:
@@ -132,15 +128,16 @@ Instead of indexing or randomly initializing our embeddings, we use `GloVe`, a s
 
 There are approximately 1.2 million tokens represented in the `GloVe` file, which is certainly orders of magnitude greater than what we'll encounter in the data. To save on compute, let's create a custom embedding layer by learning a vocabulary using our training set:
 
-{% highlight python linenos %} import util
+{% highlight python linenos %}from functions.util import load_datasets, split_data
 
+# Set up paths and constants
 embeddings_path = 'glove.twitter.27B.200d.txt'
 vocab_path = "./vocab.txt"
 SPECIAL_TOKENS = ['<UNK>', '<PAD>', '<SOS>', '<EOS>']
 
 # Download and split data
-train_sentences, train_labels, test_sentences, test_labels, label2i = util.load_datasets()
-training_sentences, training_labels, dev_sentences, dev_labels = util.split_data(train_sentences, train_labels, split=0.85)
+train_sentences, train_labels, test_sentences, test_labels, label2i = load_datasets()
+training_sentences, training_labels, dev_sentences, dev_labels = split_data(train_sentences, train_labels, split=0.85)
 
 # Set up tokenizer and make vocab
 tokenizer = Tokenizer()
@@ -153,7 +150,11 @@ with open('vocab.txt', 'w') as vf:
 
 Once we've loaded in our vocabulary, there will certainly be some tokens that are not in `GloVe` from our `spaCy` tokenizer. We'll have to randomly initialize these tokens which means that none of the semantic meaning will be captured in the embeddings. The best we can do in this case is to use <strong>[Xavier initialization](https://pytorch.org/docs/stable/_modules/torch/nn/init.html#xavier_uniform_)</strong>, which creates vectors with values in the `normal distribution`:
 
-{% highlight python linenos %}  def read_pretrained_embeddings(
+{% highlight python linenos %}from typing import List, Dict, Tuple
+import torch
+
+
+def read_pretrained_embeddings(
     embeddings_path: str,
     vocab_path: str
 ) -> Tuple[Dict[str, int], torch.FloatTensor]:
@@ -264,7 +265,10 @@ Notice in the execution step we've developed a `word2i` dictionary, a data struc
 
 Now that we've got a vocabulary and a set of embeddings, we'll need to encode our inputs and batch them for the training loop. Encoding is a simple and useful preprocessing step that helps us quickly convert our tokens into their respective embeddings. We use the common <strong>[one-hot vector](https://en.wikipedia.org/wiki/One-hot)</strong> method, which gives each token its unique index. The token are converted into vectors with the length of the vocabulary which has a value `1` at the index and `0` otherwise.
 
-{% highlight python linenos %} def encode_sentences(batch: List[List[str]], word2i: Dict[str, int]) -> torch.LongTensor:
+{% highlight python linenos %}from typing import List, Dict
+import torch
+
+def encode_sentences(batch: List[List[str]], word2i: Dict[str, int]) -> torch.LongTensor:
     """Encode the tokens in each sentence in the batch with a dictionary.
     Args:
         batch (List[List[str]]): The padded and tokenized batch of sentences.
@@ -308,7 +312,7 @@ The next part of the process is to `batch` our inputs for training, which is sim
 
 All the pieces are in place for us to implement our model in `PyTorch`, a powerful yet easy to use library for neural networks:
 
-{% highlight python linenos %} import torch
+{% highlight python linenos %}import torch
 
 class IronyDetector(torch.nn.Module):
     def __init__(
@@ -352,7 +356,11 @@ With all of the structure abstracted away, we've initialized a `BiLSTM` network 
 
 The training loop is fairly straightforward since `torch.nn.Module` comes with built-in forward and backprop functionality. Although Task A is a binary classification task, Task B is multiclass, so we use the `torch.nn.NLLLoss()` function for the loss calculation and backpropagation. 
 
-{% highlight python linenos %} from tqdm.notebook import tqdm as tqdm
+{% highlight python linenos %}from tqdm.notebook import tqdm as tqdm
+from functions.util import f1_score, avg_f1_score
+import random
+import torch
+
 def training_loop(
     num_epochs,
     train_features,
@@ -402,8 +410,7 @@ Putting everything together let's first initialize our model:
 
 We then set our hyperparameters including the [`optimizer`](https://pytorch.org/docs/stable/optim.html), many of which are prebuilt in `PyTorch`. I've gotten the best results with `AdamW` which is what I've shown here:
 
-{% highlight python linenos %} 
-# Hyperparameters
+{% highlight python linenos %}# Hyperparameters
 batch_size = 8
 epochs = 15
 learning_rate = 0.00005
@@ -413,8 +420,7 @@ optimizer = torch.optim.AdamW(model.parameters(), learning_rate, weight_decay=we
 
 Having defined `batch_size` we can now batch and encode our inputs:
 
-{% highlight python linenos %} 
-# Create batches
+{% highlight python linenos %}# Create batches
 batch_tokenized = []
 for batch in make_batches(training_sentences, batch_size):
     batch_tokenized.append(tokenizer(batch))
@@ -431,8 +437,7 @@ dev_labels = [int(l) for l in dev_labels]
 
 Finally, let's train the model!
 
-{% highlight python linenos %} 
-# Train model
+{% highlight python linenos %}# Train model
 trained_model = training_loop(
     epochs,
     train_features,
@@ -446,6 +451,38 @@ trained_model = training_loop(
 {% endhighlight %}
 
 ## Results
+
+To test our model let's write a simple predict functions:
+
+{% highlight python linenos %}from typing import List
+from functions.util import f1_score, avg_f1_score
+import torch
+
+def predict(model: torch.nn.Module, sequences: List[torch.Tensor]):
+    """Run prediction with the model
+    Args: model (torch.nn.Module): Model to use.
+        dev_sequences (List[torch.Tensor]): List of encoded sequences to analyze.
+    Returns:
+        List[int]: List of predicted labels.
+    """
+    preds = []
+    with torch.no_grad():
+        model.eval()
+        logits = model(sequences)
+        preds = list(torch.argmax(logits, axis=2).squeeze().numpy())
+    return preds
+
+# Test model
+test_features = encode_sentences(test_sentences, word2i)
+test_labels = [int(l) for l in test_labels]
+preds = predict(trained_model, test_features)
+dev_f1 = f1_score(preds, test_labels, label2i['1'])
+dev_avg_f1 = avg_f1_score(preds, test_labels, set(label2i.values()))
+print(f"Test F1 {dev_f1}")
+print(f"Avg Test F1 {dev_avg_f1}")
+{% endhighlight %}
+
+In this function, we use `with torch.no_grad()` so that no gradients are generated since we are not backpropagating anything here. We then set the model to evaluation mode with `model.eval()`, which freezes the weights and further prevents any sort of changes to the model during prediction. Since our outputs represent binary probabilities, we'll need to `squeeze()` the tensor to get the correct shape.
 
 Here are some of the hyperparameters I experimented with:
 
