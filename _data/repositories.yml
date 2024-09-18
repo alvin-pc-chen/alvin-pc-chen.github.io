@@ -1,14 +1,10 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - alvin-pc-chen
 
 repo_description_lines_max: 2
 
 github_repos:
-  - alshedivat/al-folio
-  - jekyll/jekyll
-  - twbs/bootstrap
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - mathjax/MathJax
-  - jpswalsh/academicons
+  - alvin-pc-chen/semeval_irony_detector
+  - alvin-pc-chen/cnn-from-scratch
+  - alvin-pc-chen/semeval_brainteaser
+  # - blast-cu/interactive-systems add when public
