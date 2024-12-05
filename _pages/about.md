@@ -27,7 +27,9 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-Salvete omnes! I'm a Master's student at CU Boulder in the <strong>[CLASIC](https://www.colorado.edu/linguistics/graduate-program/computational-linguistics-clasic-masters-degree)</strong> program, looking for summer internships in NLP Engineering in specific or machine learning in general.
+Salvete omnes! 
+
+I'm a Master's student at CU Boulder in the [CLASIC](https://www.colorado.edu/linguistics/graduate-program/computational-linguistics-clasic-masters-degree) program, looking for summer internships in NLP Engineering in specific or machine learning in general.
 
 I'm interested in making NLP tools accessible to the public, ranging from interactive systems for academic research to AI helpers for students. While my current projects involve building ML systems using PyTorch, TensorFlow, <strong>[or even NumPy](/projects/cnn)</strong>, my previous career in sales and marketing keeps me focused on the end user.
 
