@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: # TODO update affiliations <a href='#'>Affiliations</a>. Address. Contacts. Moto. Etc.
+subtitle: <a href='https://blast-cu.github.io/'>BLAST Group @ CU Boulder</a>
 
 profile:
   align: right
@@ -18,7 +18,9 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Salvete omnes! I'm a Master's student at CU Boulder in the <strong>[CLASIC](https://www.colorado.edu/linguistics/graduate-program/computational-linguistics-clasic-masters-degree)</strong> program, looking for summer internships in NLP Engineering in specific or machine learning in general.
+Salvete omnes! 
+
+I'm a Master's student at CU Boulder in the [CLASIC](https://www.colorado.edu/linguistics/graduate-program/computational-linguistics-clasic-masters-degree) program, looking for summer internships in NLP Engineering in specific or machine learning in general.
 
 I'm interested in making NLP tools accessible to the public, ranging from interactive systems for academic research to AI helpers for students. While my current projects involve building ML systems using PyTorch, TensorFlow, <strong>[or even NumPy](/projects/cnn)</strong>, my previous career in sales and marketing keeps me focused on the end user.
 
