@@ -29,10 +29,12 @@ latest_posts:
 
 Salvete omnes! 
 
-I'm a Master's student at CU Boulder in the [CLASIC](https://www.colorado.edu/linguistics/graduate-program/computational-linguistics-clasic-masters-degree) program, looking for summer internships in NLP Engineering in specific or machine learning in general.
+I'm a second year Master's student at CU Boulder in the <strong>[CLASIC](https://www.colorado.edu/linguistics/graduate-program/computational-linguistics-clasic-masters-degree)</strong> program; most of my research is done with the <strong>[BLAST Group](https://blast-cu.github.io/)</strong> where I've been working on developing tools to support qualitative research.
 
-I'm interested in making NLP tools accessible to the public, ranging from interactive systems for academic research to AI helpers for students. While my current projects involve building ML systems using PyTorch, TensorFlow, <strong>[or even NumPy](/projects/cnn)</strong>, my previous career in sales and marketing keeps me focused on the end user.
+I'm primarily interested in the intersection of NLP and HCI, specifically in terms of (1) researching human-in-the-loop methods that reliably incorporate expert knowledge, (2) developing interactive systems that facilitate human-AI teaming, and (3) evaluating the impact of these tools in tasks where ground truth is inaccessible. While I'm interested in exploring these interests across a broad range of qualitative data, my previous research has focused on social media datasets used in Computational Social Science.
 
 Previously, I was an Associate Manager at Johnson & Johnson in the Data Intelligence team. Extracting insights from messy sales data and designing dashboards to streamline communication informed my decision to pivot towards a data and engineering-centric career. Combined with my passion for linguistics (fluent in English, Mandarin, and French), designing NLP systems comes naturally to me.
 
-Thanks for visiting my page, feel free to check out <strong>[my projects](/projects/)</strong> or contact me via email!
+Here you'll find my <strong>[publications](/publications/)</strong> as well as my <strong>[projects](/projects/)</strong> which I use to familiarize myself with existing machine learning methods. 
+
+Thanks for visiting my page, feel free to contact me via email, valete!
