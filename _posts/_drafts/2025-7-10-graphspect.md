@@ -1,16 +1,20 @@
 ---
 layout: post
-title: Do LLMs understand aspect?
-date: 2025-07-15 21:01:00
-description: Is linguistics even real?
-tags: compling, LLMs, aspect
+title: GraphSpect
+date: 2025-07-10 21:01:00
+description: placeholder
+tags: graphspect, neuro-symbolic, GNNs, umr, compling, LLMs, aspect
 categories: research
-thumbnail: assets/img/blog/ai-coding/profile.png
+thumbnail: assets/img/blog/graphspect/profile.png
+pretty_table: true
+
 ---
+
+**Why care?**
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/blog/umr-pt1/intro.png" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/blog/graphspect/intro.png" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
@@ -38,3 +42,5 @@ For the uninitiated, [Abstract Meaning Representation](https://en.wikipedia.org/
 > The boy is desirous of the girl believing him.
 
 As humans we understand that these sentences mean roughly the same thing, but 
+
+### 
