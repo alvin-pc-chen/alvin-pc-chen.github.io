@@ -2,7 +2,7 @@
 layout: page
 title: irony detector
 description: A BiLSTM that detects irony in tweets based off SemEval 2018 Task 3. 
-img: assets/img/projects/irony_title.png
+img: assets/projects/irony/title.png
 importance: 2
 category: work
 related_publications: 
@@ -10,7 +10,7 @@ related_publications:
 
 <div class="row justify-content-md-center">
     <div class="col-sm-auto mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/projects/irony_title_card.png" title="title card" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/projects/irony/title_card.png" title="title card" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
@@ -47,7 +47,7 @@ The process is as follows:
 
 <div class="row justify-content-md-center">
     <div class="col-sm-auto mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/projects/irony_bilstm.png" title="bilstm structure" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/projects/irony/bilstm.png" title="bilstm structure" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
@@ -259,7 +259,7 @@ Notice in the execution step we've developed a `word2i` dictionary, a data struc
 
 <div class="row justify-content-md-center">
     <div class="col-sm-auto mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/projects/irony_one-hot.png" title="one-hot vector encoding" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/projects/irony/one-hot.png" title="one-hot vector encoding" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 

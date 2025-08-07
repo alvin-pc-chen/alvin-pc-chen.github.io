@@ -2,7 +2,7 @@
 layout: page
 title: numpy cnn
 description: A Convolutional Neural Network implemented in NumPy with modular layers. 
-img: assets/img/projects/cnn_title.png
+img: assets/projects/cnn/title.png
 importance: 1
 category: work
 related_publications: 
@@ -10,7 +10,7 @@ related_publications:
 
 <div class="row justify-content-md-center">
     <div class="col-sm-auto mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/projects/cnn_title_card.png" title="title card" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/projects/cnn/title_card.png" title="title card" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
@@ -38,7 +38,7 @@ Neural networks are made up of three layers: the input, hidden, and output layer
 
 <div class="row justify-content-md-center">
     <div class="col-sm-auto mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/projects/cnn_fnn.png" title="simple feedforward neural network" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/projects/cnn/fnn.png" title="simple feedforward neural network" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
@@ -58,7 +58,7 @@ The <strong>[Fashion MNIST](https://github.com/zalandoresearch/fashion-mnist)</s
 
 <div class="row justify-content-md-center">
     <div class="col-sm-auto mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/projects/cnn_sample.png" title="sample images" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/projects/cnn/sample.png" title="sample images" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
@@ -69,7 +69,7 @@ The <strong>[Fashion MNIST](https://github.com/zalandoresearch/fashion-mnist)</s
 
 <div class="row justify-content-md-center">
     <div class="col-md-auto mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/projects/cnn_cross-correlate.png" title="cross-correlation" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/projects/cnn/cross-correlate.png" title="cross-correlation" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
@@ -163,7 +163,7 @@ To understand backpropagating the `kernel weights`, consider that each kernel is
  
 <div class="row justify-content-md-center">
     <div class="col-md-auto mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/projects/cnn_convolution.png" title="convolution" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/projects/cnn/convolution.png" title="convolution" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
@@ -176,7 +176,7 @@ The `input gradient` is where we encounter `convolution`. Without going into too
 
 <div class="row justify-content-md-center">
     <div class="col-md-auto mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/projects/cnn_relu.png" title="relu" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/projects/cnn/relu.png" title="relu" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
@@ -203,7 +203,7 @@ As seen in the code, the `ReLU` class implemented here is easy to use. Once we r
 
 <div class="row justify-content-md-center">
     <div class="col-md-auto mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/projects/cnn_pool.png" title="relu" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/projects/cnn/pool.png" title="relu" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
@@ -258,7 +258,7 @@ This implementation uses a `2x2 max pool`, but any value will evenly reduce the 
 
 <div class="row justify-content-md-center">
     <div class="col-sm-auto mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/projects/cnn_feedforward.png" title="feedforward" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/projects/cnn/feedforward.png" title="feedforward" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
@@ -353,7 +353,7 @@ All the layers are done, let's put them together!
 
 <div class="row justify-content-md-center">
     <div class="col-sm-auto mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/projects/cnn_architecture.png" title="simple cnn architecture" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid path="assets/projects/cnn/architecture.png" title="simple cnn architecture" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 

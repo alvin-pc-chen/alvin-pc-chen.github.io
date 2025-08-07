@@ -1,20 +1,38 @@
 ---
 layout: post
-title: GraphSpect
-date: 2025-07-10 21:01:00
-description: placeholder
-tags: graphspect, neuro-symbolic, GNNs, umr, compling, LLMs, aspect
+title: "Designing an Annotation Pipeline: Lessons from the UMR trenches"
+date: 2025-07-10 19:00:00
+description: The surprising difficulty of annotating something as “simple” as aspect.
+tags: graphspect, annotation, UMR, compling, linguistics, aspect, semantics
 categories: research
-thumbnail: assets/img/blog/graphspect/profile.png
 pretty_table: true
-
 ---
+
+✍️ Post 1: "Designing an Annotation Pipeline for UMR Aspect: Lessons from the Trenches"
+
+Audience: ML engineers, data scientists, NLP researchers
+Focus: The annotation effort as a complex, multi-step process that required linguistics + engineering
+Suggested Sections:
+
+    Hook: The surprising difficulty of annotating something as “simple” as aspect
+
+    Why Aspect Matters: Brief motivation behind UMR and its use cases
+
+    Our Challenge: Need to create high-quality aspect labels for training
+
+    How We Did It: Weekly training, tie-breaking protocols, guidelines, practice rounds
+
+    Lessons Learned: On ambiguity, inter-annotator disagreements, alignment issues
+
+    Why This Matters for ML Engineering: Clean, consistent data doesn’t come for free — it’s an engineering problem too
+
+    Takeaways: A few bullet points on managing annotation at scale
 
 **Why care?**
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/blog/graphspect/intro.png" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/blog/umr/intro.png" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 <div class="caption">
