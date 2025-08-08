@@ -60,8 +60,11 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/the_godfather/";
-            },},{id: "news-the-umr-project-released-the-2-0-dataset-and-the-english-corpus-now-has-over-30k-sentences",
-          title: 'The UMR Project released the 2.0 dataset and the English corpus now has...',
+            },},{id: "news-we-achieved-1-on-the-leaderboard-for-semeval-2024-task-9",
+          title: 'We achieved #1 on the leaderboard for SemEval 2024 Task 9!',
+          description: "",
+          section: "News",},{id: "news-the-umr-project-released-the-2-0-dataset-with-an-english-corpus-of-over-30k-graphs",
+          title: 'The UMR Project released the 2.0 dataset with an English corpus of over...',
           description: "",
           section: "News",},{id: "projects-numpy-cnn",
           title: 'numpy cnn',
