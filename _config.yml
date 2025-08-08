@@ -7,7 +7,7 @@ first_name: Alvin
 middle_name:
 last_name: Chen 陳柏駿
 contact_note: >
-  You can even add a little note about which of these is the best way to reach you.
+  Thanks for visiting my page, reach out via email!
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 footer_text: >
@@ -208,6 +208,7 @@ plugins:
   - jekyll-terser
   - jekyll-toc
   - jekyll-twitter-plugin
+  - jekyll-pdf-embed
   - jemoji
 
 # Sitemap settings
@@ -349,6 +350,8 @@ imagemagick:
     - 1400
   input_directories:
     - assets/img/
+    - assets/blog/probing/
+    - assets/blog/graphspect/
   input_formats:
     - ".jpg"
     - ".jpeg"

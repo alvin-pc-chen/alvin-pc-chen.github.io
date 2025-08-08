@@ -1,11 +1,10 @@
 ---
-layout: cv
-permalink: /cv/
+layout: page
 title: cv
+permalink: /cv/
+description:
 nav: true
 nav_order: 5
-cv_pdf: alvin_chen_resume.pdf # you can also use external links here
-description: # This is a description of the page. You can modify it in '_pages/cv.md'. You can also change or remove the top pdf download button.
-toc:
-  sidebar: left
 ---
+
+{% pdf "/assets/pdf/alvin_chen_resume.pdf" %}

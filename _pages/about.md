@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-# subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: ML Engineer and AI Researcher
 
 profile:
   align: right
@@ -27,14 +27,8 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-Salvete omnes! 
+Hi, I'm Alvin, a recent graduate from the University of Colorado Boulder where I received my MS in Computational Linguistics and worked with both the [BLAST Group](https://blast-cu.github.io/) and the [CLEAR Lab](https://www.colorado.edu/lab/clear/). My work blends computational linguistics, machine learning, and data-centric engineering — from probing LLMs to developing AI tools for qualitative research.
 
-I'm a second year Master's student at CU Boulder in the <strong>[CLASIC](https://www.colorado.edu/linguistics/graduate-program/computational-linguistics-clasic-masters-degree)</strong> program; most of my research is done with the <strong>[BLAST Group](https://blast-cu.github.io/)</strong> where I've been working on developing tools to support qualitative research.
+Previously at Johnson & Johnson, I applied data intelligence to real-world business challenges, leading national-scale analytics, and campaign strategies. Now, I focus on neurosymbolic methods, causal interpretability, and building tools that improve human-AI interaction.
 
-I'm primarily interested in the intersection of NLP and HCI, specifically in terms of (1) researching human-in-the-loop methods that reliably incorporate expert knowledge, (2) developing interactive systems that facilitate human-AI teaming, and (3) evaluating the impact of these tools in tasks where ground truth is inaccessible. While I'm interested in exploring these interests across a broad range of qualitative data, my previous research has focused on social media datasets used in Computational Social Science.
-
-Previously, I was an Associate Manager at Johnson & Johnson in the Data Intelligence team. Extracting insights from messy sales data and designing dashboards to streamline communication informed my decision to pivot towards a data and engineering-centric career. Combined with my passion for linguistics (fluent in English, Mandarin, and French), designing NLP systems comes naturally to me.
-
-Here you'll find my <strong>[publications](/publications/)</strong> as well as my <strong>[projects](/projects/)</strong> which I use to familiarize myself with existing machine learning methods. 
-
-Thanks for visiting my page, feel free to contact me via email, valete!
+I am always happy to discuss my projects and areas of interest, feel free to [reach out](mailto:alvin.chen@colorado.edu)!
