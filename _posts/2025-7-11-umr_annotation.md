@@ -1,12 +1,37 @@
 ---
-layout: post
-title: "Designing an Annotation Pipeline: Lessons from the UMR trenches"
-date: 2025-07-10 19:00:00
+layout: distill
+title: "Designing an Annotation Pipeline: Lessons from the Trenches"
 description: The surprising difficulty of annotating something as “simple” as aspect.
 tags: graphspect, annotation, UMR, compling, linguistics, aspect, semantics
+giscus_comments: true
+date: 2025-07-11
+featured: true
+# mermaid:
+#   enabled: true
+#   zoomable: true
+# code_diff: true
+# map: true
+# chart:
+#   chartjs: true
+#   echarts: true
+#   vega_lite: true
+# tikzjax: true
+# typograms: true
 categories: research
-pretty_table: true
+
+# toc:
+#     - name: What is aspect and how do we probe for it?
+#     - name: Now you're thinking with probes
+#     - name: Implementation Details
+#     - name: Results
+#     - name: Findings & Future Experiments
+#       subsections:
+#         - name: "Finding 1: Aspect is strongly correlated with the token before the verb"
+#         - name: "Finding 2: Intermediate hidden layers seem to capture better representations"
+#         - name: "Next Steps: Fuzzily probe models by semantic roles"
+#     - name: Takeaways for your probing experiments
 ---
+
 
 ✍️ Post 1: "Designing an Annotation Pipeline for UMR Aspect: Lessons from the Trenches"
 
@@ -27,6 +52,8 @@ Suggested Sections:
     Why This Matters for ML Engineering: Clean, consistent data doesn’t come for free — it’s an engineering problem too
 
     Takeaways: A few bullet points on managing annotation at scale
+
+Annotation is one of the most important and time-consuming parts of any data-driven project. 
 
 **Why care?**
 
