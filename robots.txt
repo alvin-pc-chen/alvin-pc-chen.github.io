@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://alvin-pc-chen.github.io/sitemap.xml
